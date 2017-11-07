@@ -3,8 +3,11 @@ Sci-kit learn에서 LDA만 따로 쓸려고 만들었습니다.
   
 ## How to import  
 ```Python
-from LDAscikit import LDAprocess  
-from LDAscikit import Utils  
+from LDAscikit.LDAprocess import LDAprocess  
+from LDAscikit.Utils import Utils  
+  
+Utils().ReadCSV()  
+LDAprocess().TopicDecision()  
 ```  
   
 ## Resources
