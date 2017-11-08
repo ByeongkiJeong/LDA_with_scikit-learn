@@ -14,13 +14,13 @@ class LDAprocess:
                                             total_samples=1000000.0, perp_tol=0.1, mean_change_tol=0.001, max_doc_update_iter=100, 
                                             n_jobs=1, verbose = Verbose, random_state=None)
 
-        data = LDAmodule.fit_transform(df_matrix)
+        data = LDAmodule.fit_transform(DocWord)
         topic_names = ["Topic%i"% i for i in range(1, NumOfTopics + 1)]
-        DocTopic = pd.DataFrame(data, columns = topic_names, index = df_matrix.index)
+        DocTopic = pd.DataFrame(data, columns = topic_names, index = DocWord.index)
         if TopicWordNomalization:
-            TopicWord = pd.DataFrame(LDAmodule.components_ / LDAmodule.components_.sum(axis=1)[:, np.newaxis], columns = df_matrix.columns, index = topic_names)
+            TopicWord = pd.DataFrame(LDAmodule.components_ / LDAmodule.components_.sum(axis=1)[:, np.newaxis], columns = DocWord.columns, index = topic_names)
         else:
-            TopicWord = pd.DataFrame(LDAmodule.components_, columns = df_matrix.columns, index = topic_names)
+            TopicWord = pd.DataFrame(LDAmodule.components_, columns = DocWord.columns, index = topic_names)
         return DocTopic, TopicWord
 
     def TopicInfo(self, TopicWord):
@@ -34,7 +34,7 @@ class LDAprocess:
                                                             '6thWord','6thProb','7thWord','7thProb','8thWord','8thProb','9thWord','9thProb','10thWord','10thProb'])
         return TopicInfo
 
-    def TopicDecision(self, DocWord, TopicNumFrom = 1, TopicNumTo = 10, StepSize=1 CosineOrPerplexity = 0):
+    def TopicDecision(self, DocWord, TopicNumFrom = 1, TopicNumTo = 10, StepSize=1, CosineOrPerplexity = 0):
         """Return DataFrame of cosine similarity or perplexity"""
         LDAprocesses = []
         TopicNum = [TopicNumFrom]
