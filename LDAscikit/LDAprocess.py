@@ -50,7 +50,7 @@ class LDAprocess:
             plt.ylabel('Avg cosine similarity')
             plt.xlabel('# of Topics')
             plt.show()
-            return pd.DataFrame(list_similarity, columns=TopicNum)
+            return pd.DataFrame(list_similarity, index=TopicNum)
         elif CosineOrPerplexity == 1:
             list_perplexity = []
             for i in LDAprocesses:
@@ -59,7 +59,7 @@ class LDAprocess:
             plt.ylabel('Perplexity')
             plt.xlabel('# of Topics')
             plt.show()
-            return pd.DataFrame(list_perplexity, columns=TopicNum)
+            return pd.DataFrame(list_perplexity, index=TopicNum)
         elif CosineOrPerplexity == 2:
             list_similarity = []
             for i in LDAprocesses:
@@ -71,7 +71,7 @@ class LDAprocess:
             list_perplexity = []
             for i in LDAprocesses:
                 list_perplexity.append(i.perplexity(DocWord, sub_sampling=True))
-            return pd.DataFrame(list_similarity, columns=TopicNum), pd.DataFrame(list_perplexity, columns=TopicNum)
+            return pd.DataFrame(list_similarity, index=TopicNum), pd.DataFrame(list_perplexity, index=TopicNum)
 
 if __name__ == "__main__":
     df_matrix = pd.read_csv('matrix.csv', delimiter=',', index_col=0)
