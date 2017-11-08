@@ -34,10 +34,17 @@ class LDAprocess:
                                                             '6thWord','6thProb','7thWord','7thProb','8thWord','8thProb','9thWord','9thProb','10thWord','10thProb'])
         return TopicInfo
 
-    def TopicDecision(self, DocWord, TopicNumFrom = 1, TopicNumTo = 10, CosineOrPerplexity = 0):
+    def TopicDecision(self, DocWord, TopicNumFrom = 1, TopicNumTo = 10, StepSize=1 CosineOrPerplexity = 0):
         """Return DataFrame of cosine similarity or perplexity"""
         LDAprocesses = []
-        TopicNum = list(range(TopicNumFrom, TopicNumTo+1))
+        TopicNum = [TopicNumFrom]
+        if StepSize == 1:
+            TopicNum = list(range(TopicNumFrom, TopicNumTo+1))
+        else:
+            temp = TopicNumFrom
+            while temp < TopicNumTo:
+                temp = temp + StepSize
+                TopicNum.append(temp)
         for i in TopicNum:
             print("Processing NumOfTopic: %i"%i)
             LDAprocesses.append(LatentDirichletAllocation(n_components=i, learning_method='batch', max_iter=10).fit(DocWord))
@@ -77,4 +84,4 @@ if __name__ == "__main__":
     df_matrix = pd.read_csv('matrix.csv', delimiter=',', index_col=0)
     #DocTopic, TopicWord = LDAexecute(df_matrix, 2,1,1)
     #TopicInfo = TopicInfo(TopicWord)
-    print(LDAprocesses().TopicDecision(DocWord = df_matrix, TopicNumFrom = 2, TopicNumTo = 100, CosineOrPerplexity = 0))
+    print(LDAprocesses().TopicDecision(DocWord = df_matrix, TopicNumFrom = 2, TopicNumTo = 100, StepSize=10, CosineOrPerplexity = 0))
