@@ -71,10 +71,7 @@ class LDAprocess:
             list_similarity = []
             for i in LDAprocesses:
                 temp_TopicWord = i.components_ / i.components_.sum(axis=1)[:, np.newaxis]
-                this_similarity = []
-                for j in range(len(TopicNum)-1):
-                    this_similarity.append(cosine_similarity(temp_TopicWord[j], temp_TopicWord[j+1:]))
-                list_similarity.append(np.average(this_similarity))
+                list_similarity.append(np.average(cosine_similarity(X = temp_TopicWord, Y = None)))
             list_perplexity = []
             for i in LDAprocesses:
                 list_perplexity.append(i.perplexity(DocWord, sub_sampling=True))
