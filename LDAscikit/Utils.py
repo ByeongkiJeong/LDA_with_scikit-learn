@@ -18,17 +18,17 @@ class Utils:
         return matrix
 
     def Matrix2Edgelist(self, matrix):
-        edgelist = [('Source','Target','Weight')]
+        edgelist = []
         for source in matrix.index.values:
             for target in matrix.columns.values:
                 edgelist.append((target,source,matrix.loc[source][target]))
-        return pd.DataFrame(edgelist)
+        return pd.DataFrame(edgelist, columns=['Source','Target','Weight'])
 
     def WriteCSV(self, filename, matrix):
-        matrix.to_csv(filename)
+        matrix.to_csv(filename, index=False)
 
     def WriteXLSX(self, filename, matrix):
-        matrix.to_excel(filename)
+        matrix.to_excel(filename, index=False)
 
     def ReadCSV(self, filename, delimiter, ind_col = None):
         if ind_col == None:
