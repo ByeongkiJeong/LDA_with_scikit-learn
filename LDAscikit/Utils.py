@@ -20,8 +20,8 @@ class Utils:
     def Matrix2Edgelist(self, matrix):
         edgelist = [('Source','Target','Weight')]
         for source in matrix.index.values:
-            for target in matrix.index.values:
-                edgelist.append((target,source,matrix[source][target]))
+            for target in matrix.columns.values:
+                edgelist.append((target,source,matrix.loc[source][target]))
         return pd.DataFrame(edgelist)
 
     def WriteCSV(self, filename, matrix):
