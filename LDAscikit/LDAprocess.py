@@ -26,7 +26,7 @@ class LDAprocess:
     def TopicInfo(self, TopicWord):
         list_temp = []
         for _, row in TopicWord.iterrows():
-            temp = row.sort_values(ascending = False).iloc[0:10]
+            temp = row.sort_values(ascending = False).iloc[0:20]
             temp_row = [temp.index[0], temp.iloc[0], temp.index[1], temp.iloc[1], temp.index[2], temp.iloc[2], temp.index[3], temp.iloc[3], temp.index[4], temp.iloc[4],
                         temp.index[5], temp.iloc[5], temp.index[6], temp.iloc[6], temp.index[7], temp.iloc[7], temp.index[8], temp.iloc[8], temp.index[9], temp.iloc[9],
                         temp.index[10], temp.iloc[10], temp.index[11], temp.iloc[11], temp.index[12], temp.iloc[12], temp.index[13], temp.iloc[13], temp.index[14], temp.iloc[14],
