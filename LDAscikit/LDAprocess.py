@@ -79,7 +79,7 @@ class LDAprocess:
             list_perplexity = []
             for i in LDAprocesses:
                 list_perplexity.append(i.perplexity(DocWord, sub_sampling=True))
-            return pd.DataFrame(list_similarity, index=TopicNum), pd.DataFrame(list_perplexity, index=TopicNum)
+            return pd.concat([pd.DataFrame(list_similarity, index=TopicNum), pd.DataFrame(list_perplexity, index=TopicNum)], axis=1)
 
 if __name__ == "__main__":
     df_matrix = pd.read_csv('matrix.csv', delimiter=',', index_col=0)
