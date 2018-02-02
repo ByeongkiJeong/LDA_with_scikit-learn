@@ -1,11 +1,19 @@
 from LDAscikit import LDAprocess
 from LDAscikit import Utils
 
-df_matrix = Utils.ReadCSV(filename = "matrix.csv", delimiter = ',', ind_col = 0)
-DocTopic, TopicWord = LDAprocess.LDAexecute(df_matrix, 23,1,20)
-TopicInfo = LDAprocess.TopicInfo(TopicWord)
-similarity = LDAprocess.TopicDecision(df_matrix, TopicNumFrom = 2, TopicNumTo = 100, CosineOrPerplexity = 2)
+use_f = 2
+df_matrix = Utils.ReadCSV(filename = "example_edgelist.csv", delimiter = ',')
+df_matrix = Utils.Edgelist2Matrix(df_matrix)
 
-Utils.WriteXLSX("DocTopic.xlsx", DocTopic)
-Utils.WriteXLSX("TopicWord.xlsx", TopicWord)
-Utils.WriteXLSX("TopicInfo.xlsx", TopicInfo)
+if use_f == 1:
+    DocTopic, TopicWord = LDAprocess.LDAexecute(df_matrix, 11, 1, 10)
+    TopicInfo = LDAprocess.TopicInfo(TopicWord)
+
+    Utils.WriteCSV("DocTopic.csv", DocTopic)
+    Utils.WriteCSV("TopicWord.csv", TopicWord)
+    Utils.WriteCSV("TopicInfo.csv", TopicInfo)
+elif use_f == 0:
+    result = LDAprocess.TopicDecision(df_matrix, 2, 50, 1, 2)
+    Utils.WriteCSV("TopicDecision.csv", result)
+elif use_f == 2:
+    Utils.WriteCSV(filename="DocTerm.csv", matrix=df_matrix, index=True)

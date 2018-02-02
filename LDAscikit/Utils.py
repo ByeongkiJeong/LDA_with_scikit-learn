@@ -20,11 +20,11 @@ def Matrix2Edgelist(matrix):
             edgelist.append((target,source,matrix.loc[source][target]))
     return pd.DataFrame(edgelist, columns=['Source','Target','Weight'])
 
-def WriteCSV(filename, matrix):
-    matrix.to_csv(filename, index=False)
+def WriteCSV(filename, matrix, index=False):
+    matrix.to_csv(filename, index=index)
 
-def WriteXLSX(filename, matrix):
-    matrix.to_excel(filename, index=False)
+def WriteXLSX(filename, matrix, index=False):
+    matrix.to_excel(filename, index=index)
 
 def ReadCSV(filename, delimiter, ind_col = None):
     if ind_col == None:
