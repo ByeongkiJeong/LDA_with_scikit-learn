@@ -1,8 +1,8 @@
-import pandas as pd
+import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 from sklearn.decomposition import LatentDirichletAllocation
 from sklearn.metrics.pairwise import cosine_similarity
-import matplotlib.pyplot as plt
 
 def LDAexecute(DocWord, NumOfTopics,Verbose = 1, Max_iter = 10, TopicWordNomalization = True):
     LDAmodule = LatentDirichletAllocation(n_components=NumOfTopics, doc_topic_prior=None, topic_word_prior=None, learning_method='batch', 
@@ -79,6 +79,4 @@ def TopicDecision(DocWord, TopicNumFrom = 1, TopicNumTo = 10, StepSize=1, Cosine
 
 if __name__ == "__main__":
     df_matrix = pd.read_csv('matrix.csv', delimiter=',', index_col=0)
-    #DocTopic, TopicWord = LDAexecute(df_matrix, 2,1,1)
-    #TopicInfo = TopicInfo(TopicWord)
-    print(TopicDecision(DocWord = df_matrix, TopicNumFrom = 2, TopicNumTo = 5, StepSize=1, CosineOrPerplexity = 0))
+    DocTopic, TopicWord = LDAexecute(df_matrix, 2,1,1)
